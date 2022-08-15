@@ -1,0 +1,23 @@
+type Token @entity {
+  id: String!
+  tokenId: BigInt!
+  rgb: BigInt!
+  name: String!
+  html: String!
+  createdAt: BigInt!
+  owner: User!
+}
+
+type User @entity { 
+	id: Bytes!
+	tokens: [Token!]! @derivedFrom(field: "owner")
+}
+
+type _Schema_
+  @fulltext(
+    name: "colorSearch"
+    language: en
+    algorithm: rank
+    include: [{entity: "Token", fields:
+      [{ name: "name" }] }]
+  )

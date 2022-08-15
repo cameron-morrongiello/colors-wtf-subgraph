@@ -1,0 +1,29 @@
+specVersion: 0.0.4
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: ColorsWtf
+    network: rinkeby
+    source:
+      address: "0x3A0106d2dc417b7872659A59FB4f38c048706dbd"
+      abi: ColorsWtf
+      startBlock: 11203445
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      entities:
+        - Token
+        - User
+      abis:
+        - name: ColorsWtf
+          file: ./abis/ColorsWtf.json
+      eventHandlers:
+        - event: ColorCreated(address,uint256,uint256,string,string)
+          handler: handleColorCreated
+        - event: Transfer(indexed address,indexed address,indexed uint256)
+          handler: handleTransfer
+      file: ./src/colors-wtf.ts
+features:
+  - fullTextSearch

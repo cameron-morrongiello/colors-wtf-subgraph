@@ -1,0 +1,6 @@
+# dependancies
+/node_modules
+
+# misc
+.DS_Store
+*.pem
